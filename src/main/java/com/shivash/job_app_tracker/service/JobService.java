@@ -4,6 +4,8 @@ import com.shivash.job_app_tracker.model.Job;
 import com.shivash.job_app_tracker.repository.JobRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class JobService {
     private final JobRepository jobRepository;
@@ -14,5 +16,9 @@ public class JobService {
 
     public Job createJob(Job job){
         return jobRepository.save(job);
+    }
+
+    public List<Job> getAllJobs() {
+        return jobRepository.findAllByOrderByDateAppliedDesc();
     }
 }

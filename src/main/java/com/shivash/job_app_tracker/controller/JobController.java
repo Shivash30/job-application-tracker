@@ -2,10 +2,9 @@ package com.shivash.job_app_tracker.controller;
 
 import com.shivash.job_app_tracker.model.Job;
 import com.shivash.job_app_tracker.service.JobService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/jobs")
@@ -19,5 +18,10 @@ public class JobController {
     @PostMapping
     public Job createJob(@RequestBody Job job){
         return jobService.createJob(job);
+    }
+
+    @GetMapping
+    public List<Job> getAllJobs() {
+        return jobService.getAllJobs();
     }
 }
