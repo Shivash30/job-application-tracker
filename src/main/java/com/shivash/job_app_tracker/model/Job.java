@@ -1,6 +1,9 @@
 package com.shivash.job_app_tracker.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+
 import java.time.LocalDate;
 
 @Entity
@@ -10,25 +13,30 @@ public class Job {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @NotBlank
     @Column(nullable = false)
-    String company;
+    private String company;
 
+    @NotBlank
     @Column(nullable = false)
-    String role;
+    private String role;
 
+    @NotNull
     @Column(nullable = false)
-    LocalDate dateApplied;
+    private LocalDate dateApplied;
 
+    @NotNull
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    String status;
+    private JobStatus status;
 
     @Column(length = 1000)
-    String notes;
+    private String notes;
 
     public Job() {
     }
 
-    public Job(String company, String role, LocalDate dateApplied, String status, String notes) {
+    public Job(String company, String role, LocalDate dateApplied, JobStatus status, String notes) {
         this.company = company;
         this.role = role;
         this.dateApplied = dateApplied;
@@ -48,7 +56,7 @@ public class Job {
         this.dateApplied = dateApplied;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(JobStatus status) {
         this.status = status;
     }
 
@@ -72,7 +80,7 @@ public class Job {
         return dateApplied;
     }
 
-    public String getStatus() {
+    public JobStatus getStatus() {
         return status;
     }
 

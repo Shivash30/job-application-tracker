@@ -2,6 +2,9 @@ package com.shivash.job_app_tracker.controller;
 
 import com.shivash.job_app_tracker.model.Job;
 import com.shivash.job_app_tracker.service.JobService;
+import jakarta.validation.Valid;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,8 +19,9 @@ public class JobController {
     }
 
     @PostMapping
-    public Job createJob(@RequestBody Job job){
-        return jobService.createJob(job);
+    public ResponseEntity<Job> createJob(@Valid @RequestBody Job job){
+        Job savedJob = jobService.createJob(job);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedJob);
     }
 
     @GetMapping
