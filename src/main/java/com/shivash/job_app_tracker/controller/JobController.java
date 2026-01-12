@@ -29,4 +29,10 @@ public class JobController {
     public List<Job> getAllJobs() {
         return jobService.getAllJobs();
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteJOb(@PathVariable Long id){
+        jobService.deleteJob(id);
+        return ResponseEntity.noContent().build();
+    }
 }

@@ -31,4 +31,12 @@ public class JobService {
     public List<Job> getAllJobs() {
         return jobRepository.findAllByOrderByDateAppliedDesc();
     }
+
+    public void deleteJob(Long id) {
+        Job job = jobRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Job not found with id " + id));
+
+        jobRepository.delete(job);
+    }
+
 }
