@@ -1,5 +1,6 @@
 package com.shivash.job_app_tracker.controller;
 
+import com.shivash.job_app_tracker.dto.JobRequestDTO;
 import com.shivash.job_app_tracker.model.Job;
 import com.shivash.job_app_tracker.service.JobService;
 import jakarta.validation.Valid;
@@ -19,7 +20,7 @@ public class JobController {
     }
 
     @PostMapping
-    public ResponseEntity<Job> createJob(@Valid @RequestBody Job job){
+    public ResponseEntity<Job> createJob(@Valid @RequestBody JobRequestDTO job){
         Job savedJob = jobService.createJob(job);
         return ResponseEntity.status(HttpStatus.CREATED).body(savedJob);
     }

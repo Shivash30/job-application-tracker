@@ -1,6 +1,8 @@
 package com.shivash.job_app_tracker.service;
 
+import com.shivash.job_app_tracker.dto.JobRequestDTO;
 import com.shivash.job_app_tracker.model.Job;
+import com.shivash.job_app_tracker.model.JobStatus;
 import com.shivash.job_app_tracker.repository.JobRepository;
 import org.springframework.stereotype.Service;
 
@@ -14,7 +16,15 @@ public class JobService {
         this.jobRepository = jobRepository;
     }
 
-    public Job createJob(Job job){
+    public Job createJob(JobRequestDTO dto){
+        Job job = new Job(
+          dto.getCompany(),
+          dto.getRole(),
+          dto.getDateApplied(),
+                JobStatus.valueOf(dto.getStatus()),
+                dto.getNotes()
+        );
+
         return jobRepository.save(job);
     }
 
